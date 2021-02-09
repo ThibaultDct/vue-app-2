@@ -3,13 +3,14 @@
     <div class="sidebar">
         <a href="#home"><img src="../assets/logo.png" width="100px" height="115px"/></a>
         <a class="active" href="#home">Accueil</a>
-        <a href="#clusters">Clusters</a>
-        <a href="#servers">Serveurs</a>
-        <a href="#profil">Profil</a>
+        <a href="#building">Habitations</a>
+        <a href="#industry">Industries</a>
+        <a href="#energy">Energie</a>
+        <a href="#research">Recherche</a>
     </div>
     <div class="content">
       <div class="glass">
-        <ServerCard name="WhatTheFox"/>
+        <CityCard/>
         <ContentBox/>
       </div>
     </div>
@@ -18,16 +19,17 @@
 
 <script>
 import ContentBox from './ContentBox.vue'
-import ServerCard from './ServerCard.vue'
+import CityCard from './CityCard.vue'
 
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+    city: String,
   },
   components: {
     ContentBox,
-    ServerCard
+    CityCard
   }
 }
 </script>

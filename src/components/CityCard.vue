@@ -1,14 +1,7 @@
 <template>
   <div class="servercard z-depth-1-half">
-    <v-circle :config="{
-        x: 10,
-        y: 10,
-        width: 2,
-        height: 2,
-        fill: isOnline()
-        }"
-    />
-    <div class="title">{{ name }}</div>
+    <input class="cityName" v-model="name" placeholder="Ma ville">
+    <span>Population : {{ population }} (+{{ population_rate }})</span>
   </div>
 </template>
 
@@ -16,7 +9,9 @@
 export default {
   name: 'ServerCard',
   props: {
-    name: String
+    name: String,
+    population: Number,
+    population_rate: Number,
   },
   methods: {
       isOnline: function (){
@@ -48,13 +43,26 @@ a {
   background: #202020;
   color: white;
   height: 100px;
-  width: 300px;
+  width: 80%;
   border-radius: 1em;
   margin-bottom: 20px;
   padding: 16px;
   text-decoration: none;
   font-family: 'Lato', sans-serif;
   text-align: left;
+}
+
+.cityName {
+  color: white;
+  border: none;
+  background-color: transparent;
+  font-size: 2em;
+}
+
+.cityName::placeholder {
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  color: white;
 }
 
 .title{
