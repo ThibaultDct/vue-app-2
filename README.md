@@ -1,5 +1,7 @@
 # vue-app-2
 
+## Github Pages : https://thibaultdct.github.io/vue-app-2/
+
 ## Project setup
 ```
 npm install
