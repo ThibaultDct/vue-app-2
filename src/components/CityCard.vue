@@ -12,6 +12,7 @@ export default {
     name: String,
     population: Number,
     population_rate: Number,
+    resources: [],
   },
   methods: {
       isOnline: function (){
@@ -43,7 +44,7 @@ a {
   background: #202020;
   color: white;
   height: 100px;
-  width: 80%;
+  width: 90%;
   border-radius: 1em;
   margin-bottom: 20px;
   padding: 16px;
