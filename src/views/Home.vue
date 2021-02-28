@@ -1,13 +1,5 @@
 <template>
   <div class="global">
-    <div class="sidebar">
-        <a href="#home"><img src="../assets/logo.png" width="100px" height="115px"/></a>
-        <a class="active" href="#home">Accueil</a>
-        <a href="#building">Habitations</a>
-        <a href="#industry">Industries</a>
-        <a href="#energy">Energie</a>
-        <a href="#research">Recherche</a>
-    </div>
     <div class="content">
       <div class="glass">
         <CityCard/>
@@ -18,8 +10,8 @@
 </template>
 
 <script>
-import ContentBox from './ContentBox.vue'
-import CityCard from './CityCard.vue'
+import ContentBox from '../components/ContentBox.vue'
+import CityCard from '../components/CityCard.vue'
 
 export default {
   name: 'HelloWorld',
@@ -59,34 +51,6 @@ a {
 .global{
   display: flex;
   flex-direction: row;
-}
-
-/* SIDEBAR */
-.sidebar{
-  flex: 1;
-  margin: 0;
-  padding: 0;
-  padding-top: 20px;
-  /* background-color: #302F2F; */
-  background-color: #202020;
-  min-height: 100vh;
-  min-width: 200px;
-  overflow: auto;
-  font-family: 'Lato', sans-serif;
-}
-
-.sidebar a{
-  display: block;
-  color: white;
-  padding: 10px;
-  text-decoration: none;
-  size: 1em;
-}
-
-.sidebar a:hover{
-  font-size: 1.5em;
-  color: orange;
-  transition-delay: 0.01s;
 }
 
 /* CONTENT */
