@@ -1,19 +1,53 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../components/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import firebase from "firebase";
 
-Vue.use(VueRouter)
+import Home from "../views/Home.vue";
+import Login from '../views/Login'
+import Register from '../views/Register'
+
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '*',
+    redirect: '/login'
   },
-]
+  {
+    path: '/',
+    redirect: '/login'
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register,
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next('login');
+  else if (!requiresAuth && currentUser) next('home');
+  else next();
+});
+
+export default router;

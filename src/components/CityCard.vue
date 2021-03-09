@@ -2,10 +2,13 @@
   <div class="servercard z-depth-1-half">
     <input class="cityName" v-model="name" placeholder="Ma ville">
     <span>Population : {{ population }} (+{{ population_rate }})</span>
+    <button @click="disconnect">Déconnexion</button>
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   name: 'ServerCard',
   props: {
@@ -15,8 +18,14 @@ export default {
     resources: [],
   },
   methods: {
-      isOnline: function (){
+      isOnline: function () {
           return "green"
+      },
+      disconnect: function() {
+        firebase.auth().signOut()
+          .then(() => {
+            this.$router.replace('login');
+          })
       }
   }
 }

@@ -2,9 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import * as firebase from "firebase";
+import firebase from "firebase";
+//import store from "./store";
 
 Vue.config.productionTip = false
+
+let app = '';
 
 const configOptions = {
   apiKey: "AIzaSyCCjV8vvEbQ4jRr9blWI4alqg4m1wR6_Ic",
@@ -19,7 +22,11 @@ const configOptions = {
 firebase.initializeApp(configOptions);
 firebase.analytics();
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      render: h => h(App)
+    }).$mount('#app');
+  }
+});
