@@ -1,31 +1,80 @@
 <template>
-  <div class="servercard z-depth-1-half">
-    <input class="cityName" v-model="name" placeholder="Ma ville">
-    <span>Population : {{ population }} (+{{ population_rate }})</span>
-    <button @click="disconnect">Déconnexion</button>
+  <div class="servercard">
+    <ul>
+      <li>
+        <input class="cityName" v-model="name" placeholder="Ma ville">
+        <span>Population : {{ population }} (+{{ population_rate }})</span>
+      </li>
+      <li>
+        <span v-if="city_data !== null" class="city_id">{{ city_id }}</span>
+      </li>
+      <li>
+        <br>
+        <button @click="disconnect">Déconnexion</button>
+        <button @click="saveProgression">Sauvegarder</button>
+        <button @click="refresh">Rafraichir</button>
+      </li>
+      <li>
+        <p>Or : {{ gold }} | Matériaux : {{ materials }} | Énergie : {{ energy }}</p>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
+import axios from "axios";
+
+const userURL = "http://163.172.173.121:3000/user";
+const cityURL = "http://163.172.173.121:3000/city";
 
 export default {
-  name: 'ServerCard',
+  name: 'CityCard',
   props: {
-    name: String,
-    population: Number,
-    population_rate: Number,
-    resources: [],
+    
+  },
+  data() {
+    return {
+      name: '',
+      population: 0,
+      population_rate: 0,
+      gold: 0,
+      materials: 0,
+      energy: 0,
+      user: {},
+      city_data: {},
+      city_id: {},
+    }
+  },
+  mounted: function () {
+    this.refresh()
   },
   methods: {
-      isOnline: function () {
-          return "green"
-      },
       disconnect: function() {
         firebase.auth().signOut()
           .then(() => {
             this.$router.replace('login');
           })
+      },
+      saveProgression: async function() {
+        await axios.put(cityURL)
+          .catch(error => console.log(error))
+      },
+      refresh: async function() {
+        const fbId = firebase.auth().currentUser.uid
+        await axios.get(userURL + "?firebase_id=eq." + fbId)
+          .then(response => (this.user = response.data[0]))
+          .catch(error => console.log(error))
+        console.log(this.user)
+        await axios.get(cityURL + "?user=eq." + this.user.user_id)
+          .then(response => (this.city_data = response.data[0]))
+          .catch(error => console.log(error))
+        console.log(this.city_data)
+        this.city_id = this.city_data.city_id
+        this.gold = this.city_data.gold
+        this.materials = this.city_data.materials
+        this.energy = this.city_data.energy
+        this.population = this.city_data.population
       }
   }
 }
@@ -41,7 +90,6 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 a {
@@ -50,20 +98,19 @@ a {
 
 .servercard{
   display: block;
-  background: #202020;
-  color: white;
-  height: 100px;
+  background: #FADA93;
+  color: black;
+  height: auto;
   width: 90%;
   border-radius: 1em;
   margin-bottom: 20px;
   padding: 16px;
   text-decoration: none;
   font-family: 'Lato', sans-serif;
-  text-align: left;
 }
 
 .cityName {
-  color: white;
+  color: black;
   border: none;
   background-color: transparent;
   font-size: 2em;
@@ -72,11 +119,28 @@ a {
 .cityName::placeholder {
   text-decoration: none;
   font-family: 'Lato', sans-serif;
-  color: white;
+  color: black;
 }
 
 .title{
     font-weight: bold;
+}
+
+button {
+  padding: 0.5em 1em 0.5em 1em;
+  background: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
+button:hover {
+  background: orange;
+  border: 1px solid black;
+  color: black;
+}
+
+.city_id {
+  font-size: 0.6em;
 }
 
 </style>
