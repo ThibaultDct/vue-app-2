@@ -3,14 +3,12 @@
     <div class="content">
       <div class="glass">
         <CityCard/>
-        <ContentBox/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ContentBox from '../components/ContentBox.vue'
 import CityCard from '../components/CityCard.vue'
 
 export default {
@@ -20,7 +18,6 @@ export default {
     city: String,
   },
   components: {
-    ContentBox,
     CityCard
   }
 }
@@ -57,7 +54,6 @@ a {
 div.content{
   flex: 9;
   min-height: 100%;
-  background-color: orange;
 }
 /* GLASS EFFECT */
 .glass{

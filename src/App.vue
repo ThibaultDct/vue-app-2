@@ -35,6 +35,7 @@ export default {
   color: #2c3e50;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 .global{
@@ -48,11 +49,6 @@ export default {
   flex-direction: row;
 }
 
-/* CONTENT */
-div.content{
-  min-height: 100%;
-  background-color: orange;
-}
 /* GLASS EFFECT */
 .glass{
   margin: 0;
@@ -69,7 +65,8 @@ div.content{
   margin: 0;
   padding: 0;
   padding-top: 20px;
-  background-color: #202020;
+  /* background-color: #202020; */
+  background-color: #FADA93;
   min-height: 100vh;
   min-width: 200px;
   overflow: auto;
@@ -79,7 +76,7 @@ div.content{
 
 .sidebar a{
   display: block;
-  color: white;
+  color: black;
   padding: 10px;
   text-decoration: none;
   size: 1em;
@@ -95,7 +92,8 @@ div.content{
 div.content{
   flex: 9;
   min-height: 100%;
-  background-color: orange;
+  /* background-color: orange; */
+  background-color: #F0F0F0;
 }
 
 </style>

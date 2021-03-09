@@ -41,10 +41,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
   .login {
     text-align: center;
+    background-color: #FADA93;
+    max-width: 50%;
+    padding: 2em;
+    border-radius: 1em;
   }
 
   input {
