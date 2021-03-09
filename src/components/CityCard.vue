@@ -57,7 +57,8 @@ export default {
           })
       },
       saveProgression: async function() {
-        await axios.put(cityURL)
+        console.log(this.city_data)
+        await axios.put(cityURL + "?city_id=eq." + this.city_data.city_id)
           .catch(error => console.log(error))
       },
       refresh: async function() {
@@ -134,7 +135,7 @@ button {
 }
 
 button:hover {
-  background: orange;
+  background: white;
   border: 1px solid black;
   color: black;
 }
