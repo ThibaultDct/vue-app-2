@@ -1,21 +1,12 @@
 <template>
-  <div class="servercard">
+  <div class="summary">
     <ul>
       <li>
-        <input class="cityName" v-model="name" placeholder="Ma ville">
-        <span>Population : {{ population }} (+{{ population_rate }})</span>
-      </li>
-      <li>
-        <span v-if="city_data !== null" class="city_id">{{ city_id }}</span>
+        <span class="category energy">Énergie</span>
       </li>
       <li>
         <br>
-        <button @click="disconnect">Déconnexion</button>
-        <button @click="saveProgression">Sauvegarder</button>
-        <button @click="refresh">Rafraichir</button>
-      </li>
-      <li>
-        <p>Or : {{ gold }} | Matériaux : {{ materials }} | Énergie : {{ energy }}</p>
+        <button @click="disconnect">Améliorer</button>
       </li>
     </ul>
   </div>
@@ -25,14 +16,11 @@
 import firebase from "firebase";
 import axios from "axios";
 
-const userURL = "https://citybuilder.thibaultdct.fr/api/user";
-const cityURL = "https://citybuilder.thibaultdct.fr/api/city";
-
-const incrementRate = 10;
-const saveRate = 60;
+const userURL = "http://163.172.173.121:3000/user";
+const cityURL = "http://163.172.173.121:3000/city";
 
 export default {
-  name: 'CityCard',
+  name: 'SummaryCard',
   props: {
     
   },
@@ -44,9 +32,6 @@ export default {
       gold: 0,
       materials: 0,
       energy: 0,
-      gold_rate: 0,
-      materials_rate: 0,
-      energy_rate: 0,
       user: {},
       city_data: {},
       city_id: {},
@@ -54,15 +39,6 @@ export default {
   },
   mounted: function () {
     this.refresh()
-    // Increment resources
-    window.setInterval(() => {
-      this.incrementValues();
-    }, incrementRate * 1000)
-    // Save progression
-    window.setInterval(() => {
-      console.log("Saving progression...");
-      this.saveProgression();
-    }, saveRate * 1000)
   },
   methods: {
       disconnect: function() {
@@ -71,13 +47,7 @@ export default {
             this.$router.replace('login');
           })
       },
-      incrementValues: function () {
-        this.gold += this.gold_rate
-        this.materials += this.materials_rate
-        this.energy += this.energy_rate
-        this.population += this.population_rate
-      },
-      saveProgression: async function () {
+      saveProgression: async function() {
         console.log(this.city_data)
         this.city_data.gold = this.gold
         this.city_data.energy = this.energy
@@ -87,7 +57,7 @@ export default {
           .catch(error => console.log(error))
         this.refresh()
       },
-      refresh: async function () {
+      refresh: async function() {
         const fbId = firebase.auth().currentUser.uid
         await axios.get(userURL + "?firebase_id=eq." + fbId)
           .then(response => (this.user = response.data[0]))
@@ -102,10 +72,6 @@ export default {
         this.materials = this.city_data.materials
         this.energy = this.city_data.energy
         this.population = this.city_data.population
-        this.gold_rate = this.city_data.gold_rate
-        this.energy_rate = this.city_data.energy_rate
-        this.materials_rate = this.city_data.materials_rate
-        this.population_rate = this.city_data.population_rate
       }
   }
 }
@@ -127,7 +93,7 @@ a {
   color: #42b983;
 }
 
-.servercard{
+.summary{
   display: block;
   background: #FADA93;
   color: black;
@@ -135,9 +101,16 @@ a {
   width: 90%;
   border-radius: 1em;
   margin-bottom: 20px;
-  padding: 16px;
+  padding: 5px;
   text-decoration: none;
   font-family: 'Lato', sans-serif;
+}
+
+.energy{
+    display: block;
+    color: #1F97CB;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 .cityName {

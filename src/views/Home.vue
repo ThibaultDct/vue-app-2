@@ -3,6 +3,7 @@
     <div class="content">
       <div class="glass">
         <CityCard/>
+        <SummaryCard/>
       </div>
     </div>
   </div>
@@ -10,6 +11,7 @@
 
 <script>
 import CityCard from '../components/CityCard.vue'
+import SummaryCard from '../components/SummaryCard.vue'
 
 export default {
   name: 'HelloWorld',
@@ -18,7 +20,8 @@ export default {
     city: String,
   },
   components: {
-    CityCard
+    CityCard,
+    SummaryCard
   }
 }
 </script>
