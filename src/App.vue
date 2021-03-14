@@ -19,10 +19,98 @@
 </template>
 
 <script>
+import * as api from "./api"
+import * as type from "./store/types"
+import store from "./store/store"
+
+const incrementRate = 1;
+const saveRate = 10;
 
 export default {
   name: 'App',
   components: {
+  },
+  beforeMount: function () {
+    this.refresh()
+  },
+  mounted: function () {
+    // Increment resources
+    window.setInterval(() => {
+      this.incrementValues()
+    }, incrementRate * 1000)
+    // Save progression
+    window.setInterval(() => {
+      console.log("Saving progression...")
+      api.saveProgression()
+    }, saveRate * 1000)
+  },
+  data() {
+    return {
+      user: {},
+      city_data: {
+        city_id: '',
+        user: '',
+        name: '',
+        gold: 0,
+        energy: 0,
+        materials: 0,
+        population: 0,
+        gold_rate: 0,
+        energy_rate: 0,
+        materials_rate: 0,
+        population_rate: 0
+      },
+      stock: {
+        city: '',
+        max_gold: 0,
+        max_materials: 0,
+        max_energy: 0,
+        max_population: 0
+      }
+    }
+  },
+  methods: {
+      incrementValues: function () {
+        Object.assign(this.city_data, store.state.city_data)
+        Object.assign(this.stock, store.state.stock)
+
+        this.city_data.gold += this.city_data.gold_rate
+        this.city_data.materials += this.city_data.materials_rate
+        this.city_data.energy += this.city_data.energy_rate
+        this.city_data.population += this.city_data.population_rate
+
+        if (this.city_data.gold >= this.stock.max_gold){
+          this.city_data.gold = this.stock.max_gold
+        }
+        if (this.city_data.materials >= this.stock.max_materials){
+          this.city_data.materials = this.stock.max_materials
+        }
+        if (this.city_data.energy >= this.stock.max_energy){
+          this.city_data.energy = this.stock.max_energy
+        }
+        if (this.city_data.population >= this.stock.max_population){
+          this.city_data.population = this.stock.max_population
+        }
+        
+        store.dispatch({
+          type: type.SetCityData,
+          city: this.city_data
+        })
+      },
+      refresh: async function () {
+        console.log("Refreshing data...")
+        await api.getUser()
+        await api.getCityData()
+        await api.getStockData()
+        Object.assign(this.city_data, store.state.city_data)
+        console.log("Data refreshed.")
+      },
+      saveProgression: async function () {
+        await api.saveProgression()
+      },
+      disconnect: async function () {
+        await api.disconnect()
+      }
   }
 }
 </script>
