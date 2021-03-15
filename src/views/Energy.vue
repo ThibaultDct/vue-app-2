@@ -91,7 +91,7 @@ export default {
         this.temp.gold -= this.getEnergyProdPriceG
         this.temp.materials -= this.getEnergyProdPriceM
         this.temp.energy -= this.getEnergyProdPriceE
-        this.temp.energy_rate += 100
+        this.temp.energy_rate *= 2
         this.saveChanges()
       }
     },

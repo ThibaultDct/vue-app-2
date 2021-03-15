@@ -15,6 +15,7 @@
             Mais attention, chaque amélioration n'est pas gratuite, et le prix est indiqué à côté du bouton d'amélioration.
           </p>
         </div>
+        <Leaderboard/>
       </div>
     </div>
   </div>
@@ -22,6 +23,7 @@
 
 <script>
 import CityCard from '../components/CityCard.vue'
+import Leaderboard from '../components/Leaderboard.vue'
 
 export default {
   name: 'HelloWorld',
@@ -31,6 +33,7 @@ export default {
   },
   components: {
     CityCard,
+    Leaderboard,
   }
 }
 </script>
@@ -87,6 +90,7 @@ div.content{
   border-radius: 1em;
   padding: 16px;
   text-decoration: none;
+  margin-bottom: 20px;
 }
 
 </style>
