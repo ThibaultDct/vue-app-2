@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <h3>Connexion</h3>
-    <input type="text" v-model="email" placeholder="Email"><br>
-    <input type="password" v-model="password" placeholder="Password"><br>
+    <input type="text" v-model="form.email" placeholder="Email"><br>
+    <input type="password" v-model="form.password" placeholder="Password"><br>
     <button @click="login">Connexion</button>
     <p>Vous n'avez pas encore de compte ? Vous pouvez en <router-link to="/register">créer un</router-link></p>
   </div>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     login: function() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
           (userCredential) => {
             this.user = userCredential.user;

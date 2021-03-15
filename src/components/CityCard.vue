@@ -79,6 +79,9 @@ export default {
       },
       disconnect: async function () {
         await api.disconnect()
+        .then(() => {
+          this.$router.replace('login');
+        })
       },
       changeName: async function () {
         if (this.changingName === false){

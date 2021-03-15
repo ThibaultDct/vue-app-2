@@ -31,7 +31,7 @@ export default new Vuex.Store({
         set_city_data (state, payload){
             return state.city_data = payload.city;
         },
-        reseet_city_data (state){
+        reset_city_data (state){
             return state.city_data = {};
         },
         // Stock

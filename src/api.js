@@ -7,11 +7,17 @@ const userURL = "https://citybuilder.thibaultdct.fr/api/user";
 const cityURL = "https://citybuilder.thibaultdct.fr/api/city";
 const stockURL = "https://citybuilder.thibaultdct.fr/api/stock";
 
-export function disconnect () {
-    firebase.auth().signOut()
-    .then(() => {
-      this.$router.replace('login');
+export async function disconnect () {
+    store.dispatch({
+      type: type.ResetUser
     })
+    store.dispatch({
+      type: type.ResetCityData
+    })
+    store.dispatch({
+      type: type.ResetStock
+    })
+    await firebase.auth().signOut()
 }
 
 export async function getUser () {

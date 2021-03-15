@@ -1,12 +1,11 @@
 <template>
   <div id="app">
     <div class="sidebar">
-      <a href="#home"><img src="./assets/logo.png" width="100px" height="115px"/></a>
-      <a class="active" href="#home">Accueil</a>
-      <a href="#building">Habitations</a>
-      <a href="#industry">Industries</a>
-      <a href="#energy">Energie</a>
-      <a href="#research">Recherche</a>
+      <router-link to="/home"><img src="./assets/logo.png" width="100px" height="115px"/></router-link>
+      <router-link to="/home" class="active">Accueil</router-link>
+      <router-link to="/population">Habitations</router-link>
+      <router-link to="/industries">Industries</router-link>
+      <router-link to="/energy">Energie</router-link>
     </div>
     <div class="global">
       <div class="content">
@@ -31,17 +30,17 @@ export default {
   components: {
   },
   beforeMount: function () {
-    this.refresh()
+      this.refresh()
   },
   mounted: function () {
     // Increment resources
     window.setInterval(() => {
-      this.incrementValues()
+        this.incrementValues()
     }, incrementRate * 1000)
     // Save progression
     window.setInterval(() => {
-      console.log("Saving progression...")
-      api.saveProgression()
+        console.log("Saving progression...")
+        api.saveProgression()
     }, saveRate * 1000)
   },
   data() {
@@ -163,6 +162,14 @@ export default {
 }
 
 .sidebar a{
+  display: block;
+  color: black;
+  padding: 10px;
+  text-decoration: none;
+  size: 1em;
+}
+
+.router-link {
   display: block;
   color: black;
   padding: 10px;

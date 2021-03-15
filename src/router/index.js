@@ -3,8 +3,11 @@ import VueRouter from "vue-router";
 import firebase from "firebase";
 
 import Home from "../views/Home.vue";
-import Login from '../views/Login'
-import Register from '../views/Register'
+import Login from '../views/Login';
+import Register from '../views/Register';
+import Industries from '../views/Industries';
+import Energy from '../views/Energy';
+import Population from '../views/Population';
 
 Vue.use(VueRouter);
 
@@ -31,6 +34,30 @@ const routes = [
     path: "/home",
     name: "home",
     component: Home,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/industries",
+    name: "industries",
+    component: Industries,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/energy",
+    name: "energy",
+    component: Energy,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/population",
+    name: "population",
+    component: Population,
     meta: {
       requiresAuth: true
     }
