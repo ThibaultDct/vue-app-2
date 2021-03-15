@@ -24,6 +24,44 @@
         </span>
       </li>
       <li>
+        <div>
+          <span>Stock d'or </span>
+          <k-progress
+            active
+            type="line"
+            :percent=getGoldPercent
+            :color="['goldenrod', 'goldenrod']"
+          ></k-progress>
+        </div>
+        <div>
+          <span>Stock de matériaux </span>
+          <k-progress
+            active
+            type="line"
+            :percent=getMaterialsPercent
+            :color="['green', 'green']"
+          ></k-progress>
+        </div>
+        <div>
+          <span>Stock d'énergie </span>
+          <k-progress
+            active
+            type="line"
+            :percent=getEnergyPercent
+            :color="['cornflowerblue', 'cornflowerblue']"
+          ></k-progress>
+        </div>
+        <div>
+          <span>Occupation habitations </span>
+          <k-progress
+            active
+            type="line"
+            :percent=getPopulationPercent
+            :color="['purple', 'purple']"
+          ></k-progress>
+        </div>
+      </li>
+      <li>
         <br>
         <button @click="disconnect">Déconnexion</button>
         <button @click="saveProgression">Sauvegarder</button>
@@ -62,8 +100,26 @@ export default {
         energy_rate: 0,
         materials_rate: 0,
         population_rate: 0
-      }
+      },
+      stock: {},
     }
+  },
+  beforeMount: function () {
+    this.refresh()
+  },
+  computed: {
+    getGoldPercent: function () {
+      return Math.round((this.city_data.gold / this.stock.max_gold) * 100)
+    },
+    getMaterialsPercent: function () {
+      return Math.round((this.city_data.materials / this.stock.max_materials) * 100)
+    },
+    getEnergyPercent: function () {
+      return Math.round((this.city_data.energy / this.stock.max_energy) * 100)
+    },
+    getPopulationPercent: function () {
+      return Math.round((this.city_data.population / this.stock.max_population) * 100)
+    },
   },
   mounted: function () {
     window.setInterval(() => {
@@ -73,6 +129,7 @@ export default {
   methods: {
       refresh: async function () {
         Object.assign(this.city_data, store.state.city_data)
+        Object.assign(this.stock, store.state.stock)
       },
       saveProgression: async function () {
         await api.saveProgression()

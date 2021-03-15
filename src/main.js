@@ -4,8 +4,10 @@ import './registerServiceWorker'
 import router from './router'
 import firebase from "firebase";
 import store from "./store/store.js";
+import KProgress from 'k-progress'
 
 Vue.config.productionTip = false
+Vue.component('k-progress', KProgress)
 
 let app = '';
 
