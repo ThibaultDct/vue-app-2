@@ -10,6 +10,7 @@
 
 <script>
 import firebase from "firebase";
+import * as api from "../api"
 
 export default {
   name: 'login',
@@ -23,11 +24,17 @@ export default {
     };
   },
   methods: {
+    getData: async function () {
+      await api.getUser()
+      await api.getCityData()
+      await api.getStockData()
+    },
     login: function() {
       firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(
           (userCredential) => {
             this.user = userCredential.user;
+            this.getData()
             this.$router.replace('home');
           }
         )
