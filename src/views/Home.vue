@@ -3,6 +3,18 @@
     <div class="content">
       <div class="glass">
         <CityCard/>
+        <div class="description">
+          <p>Voici la page de résumé de votre ville !</p>
+          <p>Le but ? Augmenter au maximum la population de votre ville.</p>
+          <p>Comment ? En améliorant vos infrastructures</p>
+          <p>
+            En effet, sur le menu de gauche, il est mis à votre disposition un ensemble de catégories.
+            Pour chaque catégorie, il existe des améliorations de production, et des amélioration de stockage.
+            Pour chaque amélioration de production , vous augmenterez la production par seconde de la ressource concernée.
+            Pour chaque amélioration de stockage, vous augmenterez le stockage maximum de votre ville pour la ressource concernée.
+            Mais attention, chaque amélioration n'est pas gratuite, et le prix est indiqué à côté du bouton d'amélioration.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +75,18 @@ div.content{
   height: 100%;
   width: 100%;
   padding: 50px;
+}
+
+.description{
+  display: block;
+  background: #202020;
+  color: white;
+  min-height: 100px;
+  min-width: 100px;
+  width: 90%;
+  border-radius: 1em;
+  padding: 16px;
+  text-decoration: none;
 }
 
 </style>

@@ -11,7 +11,7 @@
         <span class="item">Centre commercial</span>
         <br/><span class="description">Améliorer le centre commercial permet d'augmenter la population entrante.</span>
         <br/><button class="upgrade" @click="upgradePopulationProd">Améliorer</button>
-        <span class="price">  {{ getPopulationStockPriceG }} Or | {{ getPopulationStockPriceM }} Matériaux | {{ getPopulationStockPriceE }} Énergie</span>
+        <span class="price">  {{ getPopulationProdPriceG }} Or | {{ getPopulationProdPriceM }} Matériaux | {{ getPopulationStockPriceE }} Énergie</span>
       </li>
       <li>
         <h3>Stockage</h3>
@@ -85,24 +85,24 @@ export default {
     },
     upgradePopulationProd: async function () {
       this.update()
-      if (this.getPopulationProdPriceG > this.temp.gold || this.getPopulationProdPriceM > this.temp.materials || this.getPopulationProdPriceE > this.temp.population){
+      if (this.getPopulationProdPriceG > this.temp.gold || this.getPopulationProdPriceM > this.temp.materials || this.getPopulationProdPriceE > this.temp.energy){
           alert("Vous n'avez pas les ressources nécessaires pour acheter cette amélioration")
       } else {
         this.temp.gold -= this.getPopulationProdPriceG
         this.temp.materials -= this.getPopulationProdPriceM
-        this.temp.population -= this.getPopulationProdPriceE
-        this.temp.population_rate += 100
+        this.temp.energy -= this.getPopulationProdPriceE
+        this.temp.population_rate += 10
         this.saveChanges()
       }
     },
     upgradePopulationStock: async function () {
       this.update()
-      if (this.getPopulationStockPriceG > this.temp.gold || this.getPopulationStockPriceM > this.temp.materials || this.getPopulationStockPriceE > this.temp.population){
+      if (this.getPopulationStockPriceG > this.temp.gold || this.getPopulationStockPriceM > this.temp.materials || this.getPopulationStockPriceE > this.temp.energy){
           alert("Vous n'avez pas les ressources nécessaires pour acheter cette amélioration")
       } else {
         this.temp.gold -= this.getPopulationStockPriceG
         this.temp.materials -= this.getPopulationStockPriceM
-        this.temp.population -= this.getPopulationStockPriceE
+        this.temp.energy -= this.getPopulationStockPriceE
         this.tempStock.max_population *= 2
         this.saveChanges()
       }
