@@ -153,14 +153,14 @@ button {
   color: black;
 }
 
-li {
-  margin-bottom: 1em;
-}
-
 button:hover {
   background: white;
   border: 1px solid black;
   color: black;
+}
+
+li {
+  margin-bottom: 1em;
 }
 
 .city_id {
