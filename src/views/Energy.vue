@@ -48,13 +48,13 @@ export default {
   },
   computed: {
       getEnergyProdPriceG: function () {
-          return this.tempStock.max_energy
+          return this.temp.energy_rate * 30
       },
       getEnergyProdPriceM: function () {
-          return this.tempStock.max_energy * 2
+          return this.temp.energy_rate * 20
       },
       getEnergyProdPriceE: function () {
-          return this.tempStock.max_energy / 2
+          return this.temp.energy_rate * 10
       },
       getEnergyStockPriceG: function () {
           return this.tempStock.max_energy * 2
