@@ -60,6 +60,7 @@ export default {
         population_rate: 0
       },
       stock: {
+        stock_id: '',
         city: '',
         max_gold: 0,
         max_materials: 0,

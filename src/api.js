@@ -60,5 +60,13 @@ export async function saveProgression () {
     console.log(store.state.city_data)
     await axios.put(cityURL + "?city_id=eq." + store.state.city_data.city_id, store.state.city_data)
       .catch(error => console.log(error))
+    let tempStock = {}
+    await axios.get(stockURL + "?city=eq." + store.state.city_data.city_id)
+    .then(response => (
+      tempStock = response.data[0]
+    ))
+    .catch(error => console.log(error))
+    await axios.put(stockURL + "?stock_id=eq." + tempStock.stock_id, store.state.stock)
+      .catch(error => console.log(error))
     console.log("Data saved.")
 }
