@@ -100,8 +100,8 @@ export default {
       if (this.getEnergyStockPriceG > this.temp.gold || this.getEnergyStockPriceM > this.temp.materials || this.getEnergyStockPriceE > this.temp.energy){
           alert("Vous n'avez pas les ressources nécessaires pour acheter cette amélioration")
       } else {
-        this.temp.gold -= this.getGoldStockPriceG
-        this.temp.materials -= this.getGoldStockPriceM
+        this.temp.gold -= this.getEnergyStockPriceG
+        this.temp.materials -= this.getEnergyStockPriceM
         this.temp.energy -= this.getEnergyStockPriceE
         this.tempStock.max_energy *= 2
         this.saveChanges()
